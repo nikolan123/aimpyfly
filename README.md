@@ -60,7 +60,7 @@ I'm actively working on extending this client to support additional features:
  - Viewing user profiles
  - Setting the profile of python client
  - Viewing away messages
- - Setting the way message of the python client
+ - Setting the away message of the python client
  - Selecting client type.
 
 I encourage contributions to help build out this functionality!
