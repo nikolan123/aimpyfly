@@ -270,15 +270,19 @@ class AIMClient:
             sender = data[offset:offset + sender_length].decode('utf-8', errors='replace')
             offset += sender_length
             self.logger.info(f"Sender: {sender}")
+
+            # Decode remaining data as UTF-8
+            decoded = data.decode('utf-8', errors='ignore').strip()
+            decoded = ''.join(c for c in decoded if c.isprintable() or c in '\n\r\t')
         
             # Find HTML content
-            html_start = data.find(b'<HTML>')
-            html_end = data.find(b'</HTML>') + 7  # Include the closing tag
+            html_start = decoded.lower().find('<html>')
+            html_end = decoded.lower().find('</html>') + 7  # Include the closing tag
         
             self.logger.info(f"HTML content start: {html_start}, end: {html_end}")
         
             if html_start != -1 and html_end != -1:
-                html_content = data[html_start:html_end].decode('utf-8', errors='replace')
+                html_content = decoded[html_start:html_end]
                 self.logger.info(f"HTML content: {html_content}")
                 
                 # Extract text content from HTML
