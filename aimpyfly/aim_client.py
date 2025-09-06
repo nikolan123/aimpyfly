@@ -417,6 +417,8 @@ class AIMClient:
             self.logger.info("No incoming FLAPs to process. Sending keep-alive.")
             await self.send_keep_alive()
             return None
+        except BrokenPipeError:
+            raise BrokenPipeError(errno.EPIPE, os.strerror(errno.EPIPE))
         except Exception as e:
             self.logger.error(f"Error reading FLAP packet: {e}")
             return None
