@@ -648,7 +648,7 @@ class AIMClient:
         self.logger.debug(f"\nSent Rate Request: \n  {self.oscar.read_flap(flap_packet)}")
         
         # Receive and process the rate response
-        await asyncio.sleep(5) # Yuck!
+        await asyncio.sleep(1) # Yuck!
         response = await self.reader.read(4096)
         self.logger.debug(f"Received raw data: {response.hex()}")
         if len(response) > 0:
